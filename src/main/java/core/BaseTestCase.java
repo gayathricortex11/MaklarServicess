@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
@@ -23,6 +25,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.ITestResult;
+
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
+
 import org.apache.commons.io.FileUtils;
 import static core.GlobalConstants.*;
 import junit.framework.TestCase;
@@ -49,6 +56,7 @@ public class BaseTestCase extends TestCase{
 		}
 		if(BROWSER.equalsIgnoreCase("firefox")){
             driver = new FirefoxDriver();
+            System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
             System.out.println(baseUrl);
             driver.get(baseUrl);
             maximize();
@@ -125,6 +133,7 @@ public class BaseTestCase extends TestCase{
 		      DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		      desiredCapabilities.setJavascriptEnabled(true);
 		      desiredCapabilities.setCapability("takesScreenshot", true);
+		      
 		      File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		      System.out.println("File:" + srcFile);
 		      String methodName = this.getName();
@@ -141,13 +150,41 @@ public class BaseTestCase extends TestCase{
 		     } catch (Exception e ) {
 		      System.out.println("Issue in tear down function .." + e);
 		      e.printStackTrace();
-		     }
 		  driver.quit();
 		  
 		  System.out.println("END : " + this.getClass().getSimpleName());
 		  System.out.println("End : "+ this.getName());
 		  System.out.println("---------------ENDED BROWSER----------------------"); 
-		  driver.quit();
+		     }
 	 }
+	 
+	 private static String getTestMethodName(ITestResult iTestResult)
+		{
+			return iTestResult.getMethod().getConstructorOrMethod().getName();
+		}
+	 @Attachment (value="{0}" , type="text/plain")
+		public static String saveTextLog(String message)
+		{
+			return message;
+		}
+	 public byte[] saveScreenshotPNG(WebDriver driver, byte[] screenShot)
+		{
+			return screenShot;
+		}
+		
+		public void onTestFailure(ITestResult iTestResult, byte[] screenShot) {
+			System.out.println("Test Success Method"+ getTestMethodName(iTestResult)+"Failed");
+			Object testClass= iTestResult.getInstance();
+			WebDriver driver= BasePage.getDriver();
+			System.out.print(testClass);
+			if(driver instanceof WebDriver)
+			{
+				System.out.println("Screenshot captured for TestCase"+getTestMethodName(iTestResult) );
+				saveScreenshotPNG(driver, screenShot);
+			}
+			saveTextLog(getTestMethodName(iTestResult)+"failed and screenshot taken!");
+			
+		}
+
 	 
 }

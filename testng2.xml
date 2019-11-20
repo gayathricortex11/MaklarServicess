@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<listeners>
+<listener class-name="maklarpages.TestAllureListener"/>
+</listeners>
+<test thread-count="5" name="TestDigitalMembershipPaymentPage" junit="true">
+  <parameter name="TestDigitalMembershipPaymentPage" value="">
+    <classes>
+      <class name="testmaklarpages.TestDigitalMembershipPaymentPage"/>    
+    </classes>
+    </parameter>
+  </test> <!-- junittest -->
+   
+   <test thread-count="5" name="TestBrokerImagePdfStaticPaymentPage" junit="true">
+  <parameter name="TestBrokerImagePdfStaticPaymentPage" value="">
+    <classes>
+      <class name="testmaklarpages.TestBrokerImagePdfStaticPaymentPage"/>    
+    </classes>
+    </parameter>
+  </test> <!-- junittest -->
+   
+  
+   <test thread-count="5" name="TestRealEstateImageRealTimeDynamicPaymentPage" junit="true">
+  <parameter name="TestRealEstateImageRealTimeDynamicPaymentPage" value="">
+    <classes>
+      <class name="testmaklarpages.TestRealEstateImageRealTimeDynamicPaymentPage"/>    
+    </classes>
+    </parameter>
+  </test> <!-- junittest -->
+  
+  <test thread-count="5" name="ContactPageTestCases" junit="true">
+  <parameter name="ContactPageTestCases" value="">
+    <classes>
+      <class name="testmaklarpages.TestAboutUsPage"/>
+      
+    </classes>
+    </parameter>
+  </test>
+  
+  <test thread-count="5" name="HomePageTestCase" junit="true">
+  <parameter name="HomePageTestCase" value="">
+    <classes>
+      <class name="testmaklarpages.TestHomePage"/>    
+    </classes>
+    </parameter>
+  </test> <!-- junittest -->
+  
+    
+      
+</suite> <!-- Suite -->
+
+
+  
+  
+  
+  
+  

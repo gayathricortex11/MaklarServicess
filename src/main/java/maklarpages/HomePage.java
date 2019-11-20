@@ -14,8 +14,36 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-public class HomePage {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import core.BasePage;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
+import io.qameta.allure.Step;
+
+@Test
+@Listeners({TestAllureListener.class})
+public class HomePage extends BasePage {
+	
+	private BasePage basePage;
+	public void setUp(WebDriver driver) throws Exception {
+		 basePage = new BasePage();
+		 driver = core.BasePage.initialize_driver(driver);
+		 
+		}
+	
+	@Test
+	@Parameters("homepage")
+	@Step("VerifyLinks")
+	@JsonIgnoreProperties("Info")
+	@Description("Verifying Text And Links On HomePAge")
+	@Link("Text and Links on Homepage")
+	@Attachment("Text and Links on HomePage")
 	public static void verifyTextAndLinkOnHomePage(WebDriver driver)throws Exception
 	{
 		Thread.sleep(1000);	//*[@id="header-bg"]/div/a[1]

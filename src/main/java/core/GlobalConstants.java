@@ -1,5 +1,9 @@
 package core;
 
+
+import org.testng.annotations.Test;
+
+@Test
 public class GlobalConstants {
 	public static String BROWSER = browse();
 	 public static String browse(){
@@ -24,12 +28,5 @@ public class GlobalConstants {
 		public static String AdminBaseUrl="http://staging-maklarservice.cortexcraft.com/";
 		public static String NavigationUrl="http://staging-maklarservice.cortexcraft.com/";
 		public static String CHROMEpATH = "C:\\chromedriver.exe";
-		public static String AdmUserName="admin@example.com";
-		public static String AdmPassword="123@Cortex";
-		public static String Adm1UserName="";
-		public static String Adm1Password="";
-		public static String superAdminUserName="";
-		public static String superAdminPassword="";
-		
 		
 }
